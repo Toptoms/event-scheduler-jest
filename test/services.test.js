@@ -35,25 +35,29 @@ describe("Event Service",()=> {
 
     test('get first event shall call repository', async () => {
         let eventService = new EventService(new EventRepository());
-        eventService.getFirstEvent();
         expect(eventService.getFirstEvent().getTitle()).toBe("First event");
     })
     test('get last event shall call repository', async () => {
         let eventService = new EventService(new EventRepository());
-        eventService.getFirstEvent();
         expect(eventService.getLastEvent().getTitle()).toBe("Unit test againt");
     })
 
-    test('longgestEvent event shall call repository', async () => {
+    test('longgest event shall call repository', async () => {
         let eventService = new EventService(new EventRepository());
-        eventService.getFirstEvent();
         expect(eventService.getLongestEvent().getTitle()).toBe("Hello World");
     })
 
-    test('longgestEvent event shall call repository', async () => {
+    test('longgest event shall call repository', async () => {
         let eventService = new EventService(new EventRepository());
-        eventService.getFirstEvent();
         expect(eventService.getShortestEvent().getTitle()).toBe("First event");
     })
+
+    test('hasEventon shall call repository', async () => {
+        let eventService = new EventService(new EventRepository());
+        console.log(eventService.hasEventOn("2019-12-17T02:24:00.000Z").getTitle())
+        expect(eventService.hasEventOn("2019-12-17T02:24:00.000Z").getTitle()).toBe("Hello World");
+    })
+
+
 
 });

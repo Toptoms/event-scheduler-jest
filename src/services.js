@@ -33,7 +33,7 @@ export default class EventService {
     getFirstEvent() {
         let results = this._eventRepository.getAll();
         results.sort((a, b) => {
-            return a.startTime - b.startTime;
+            return a.getStartTime() - b.getStartTime();
         });
         const result = results[0];
         return result; // ou results.shift() renvoie le premier objet du tableau
@@ -46,7 +46,7 @@ export default class EventService {
     getLastEvent() {
         let results = this._eventRepository.getAll();
         results.sort((a, b) => {
-           return b.startTime - a.startTime;
+            return b.getStartTime() - a.getStartTime();
         });
         const result = results[0];
         return result; // ou results.shift() renvoie le premier objet du tableau
@@ -59,7 +59,7 @@ export default class EventService {
     getLongestEvent() {
         let results = this._eventRepository.getAll();
         results.sort((a, b) => {
-           return (b.startTime - b.startTime) - (a.startTime - a.startTime)
+            return (b.getEndTime() - b.getStartTime()) - (a.getEndTime() - a.getStartTime())
         });
         const result = results[0];
         return result; // ou results.shift() renvoie le premier objet du tableau
@@ -72,7 +72,7 @@ export default class EventService {
     getShortestEvent() {
         let results = this._eventRepository.getAll();
         results.sort((a, b) => {
-           return (a.startTime - a.startTime) - (b.startTime - b.startTime)
+            return (a.getEndTime() - a.getStartTime()) - (b.getEndTime() - b.getStartTime())
         });
         const result = results[0];
         return result; // ou results.shift() renvoie le premier objet du tableau
@@ -85,9 +85,12 @@ export default class EventService {
      * @return {Event[]}
      */
     hasEventOn(time) {
+        // console.log("tim"+time)
         let evts = this._eventRepository.getAll();
         return evts.filter(function (e) {
+            // console.log(e.getStartTime());
             return time >= e.getStartTime() && time <= e.getEndTime();
+
         });
     }
 
